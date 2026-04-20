@@ -3,19 +3,27 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#78c2ad">
     <title>Sign Up</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/minty/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
   </head>
-  <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
+  <body class="d-flex flex-column min-vh-100">
+
+    <nav class="navbar navbar-expand-md navbar-light navbar-mint">
       <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">Home</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNav" aria-controls="offcanvasNav" aria-label="Toggle navigation">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+          <i class="bi bi-house-fill" aria-hidden="true"></i><span>Home</span>
+        </a>
+        <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNav" aria-controls="offcanvasNav" aria-label="Open menu">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="d-none d-md-block">
-          <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+        <div class="collapse navbar-collapse d-md-flex" id="navbarNav">
+          <ul class="navbar-nav ms-auto gap-md-2 align-items-md-center">
             <li class="nav-item"><a class="nav-link" href="sign-in.html">Sign In</a></li>
             <li class="nav-item"><a class="nav-link" href="sign-up.html">Sign Up</a></li>
           </ul>
@@ -23,56 +31,58 @@
       </div>
     </nav>
 
-    <!-- <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasNavLabel">Menu</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-        <ul class="nav nav-pills flex-column">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="credit-simulator.html">Credit Simulator</a></li>
-          <li class="nav-item"><a class="nav-link" href="guides.html">Guides</a></li>
-          <li class="nav-item"><a class="nav-link" href="money-tips.html">Money Tips</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Budget</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Help</a></li>
+        <ul class="nav nav-pills flex-column gap-1">
+          <li class="nav-item"><a class="nav-link" href="index.html"><i class="bi bi-house-fill" aria-hidden="true"></i>Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="sign-in.html"><i class="bi bi-box-arrow-in-right" aria-hidden="true"></i>Sign In</a></li>
+          <li class="nav-item"><a class="nav-link" href="sign-up.html"><i class="bi bi-person-plus" aria-hidden="true"></i>Sign Up</a></li>
         </ul>
       </div>
-    </div> -->
+    </div>
 
-    <main class="container py-4">
-      <div class="row justify-content-center">
-        <div class="col-12 col-md-6">
-          <div class="card">
-            <div class="card-body">
-              <h1 class="h3 mb-4">Sign Up</h1>
-              <form id="signUpForm" action="after-Sign-in.html" novalidate>
-                <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="fullName" placeholder="Full Name" required>
-                  <label for="fullName">Full Name</label>
-                  <div class="valid-feedback">Full name looks good.</div>
+    <main class="container mint-container py-4 flex-grow-1">
+      <div id="signUpAlert" class="alert alert-success alert-dismissible fade d-none" role="status">
+        <i class="bi bi-check-circle me-2" aria-hidden="true"></i>Account created — redirecting…
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <div class="row justify-content-center py-2 g-3">
+        <div class="col-12 col-md-8 col-lg-6">
+          <div class="card shadow-sm">
+            <div class="card-body p-4">
+              <h1 class="h3 mb-3 d-flex align-items-center gap-2">
+                <i class="bi bi-person-plus text-primary" aria-hidden="true"></i>Sign Up
+              </h1>
+              <form id="signUpForm" action="index.html" novalidate>
+                <div class="mb-3">
+                  <label for="fullName" class="form-label">Full Name</label>
+                  <input type="text" class="form-control" id="fullName" name="fullName" autocomplete="name" required>
+                  <div class="invalid-feedback">Enter your full name.</div>
                 </div>
-                <div class="form-floating mb-3">
-                  <input type="email" class="form-control is-valid" id="email" placeholder="Email" required>
-                  <label for="email">Email</label>
-                  <div class="valid-feedback">Email looks good.</div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" autocomplete="email" required>
+                  <div class="invalid-feedback">Enter a valid email address.</div>
                 </div>
-                <div class="form-floating mb-3">
-                  <input type="password" class="form-control" id="password" placeholder="Password" required>
-                  <label for="password">Password</label>
-                  <div class="invalid-feedback">Password is required.</div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" name="password" autocomplete="new-password" required minlength="8">
+                  <div class="invalid-feedback">Use at least 8 characters.</div>
                 </div>
-                <div class="form-floating mb-3">
-                  <input type="password" class="form-control is-invalid" id="confirmPassword" placeholder="Confirm Password" required>
-                  <label for="confirmPassword">Confirm Password</label>
-                  <div class="invalid-feedback">Please confirm your password.</div>
+                <div class="mb-3">
+                  <label for="confirmPassword" class="form-label">Confirm Password</label>
+                  <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" autocomplete="new-password" required>
+                  <div class="invalid-feedback" id="confirmFeedback">Passwords must match.</div>
                 </div>
-                <div class="form-floating mb-3">
-                  <textarea class="form-control" placeholder="Goals (Optional)" id="goals" rows="3"></textarea>
-                  <label for="goals">Goals (Optional)</label>
+                <div class="mb-3">
+                  <label for="goals" class="form-label">Goals (optional)</label>
+                  <textarea class="form-control" id="goals" name="goals" rows="3" placeholder="What do you want to learn?"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Create Account</button>
+                <button type="submit" class="btn btn-primary"><i class="bi bi-person-check me-1" aria-hidden="true"></i>Create Account</button>
               </form>
               <p class="mt-3 mb-0">Already have an account? <a href="sign-in.html">Sign in</a></p>
             </div>
@@ -81,31 +91,64 @@
       </div>
     </main>
 
+    <footer class="site-footer border-top">
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         var form = document.getElementById('signUpForm');
-        if (form) {
-          form.addEventListener('submit', function (event) {
-            event.preventDefault();
-            var inputs = form.querySelectorAll('input[type="text"], input[type="email"], input[type="password"], textarea');
-            var hasValue = Array.prototype.some.call(inputs, function (input) {
-              return input.value.trim() !== '';
-            });
-            if (!hasValue) {
-              return;
-            }
-            localStorage.setItem('signedIn', 'true');
-            var button = form.querySelector('button[type="submit"]');
-            if (button) {
-              button.disabled = true;
-            }
-            window.location.href = form.action;
-          });
+        if (!form) return;
+
+        var fullName = document.getElementById('fullName');
+        var email = document.getElementById('email');
+        var password = document.getElementById('password');
+        var confirm = document.getElementById('confirmPassword');
+        var alertEl = document.getElementById('signUpAlert');
+
+        function resetField(el) {
+          el.classList.remove('is-invalid', 'is-valid');
         }
+
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          [fullName, email, password, confirm].forEach(resetField);
+
+          var ok = true;
+          if (!fullName.value.trim()) {
+            fullName.classList.add('is-invalid');
+            ok = false;
+          } else fullName.classList.add('is-valid');
+
+          var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+          if (!emailOk) {
+            email.classList.add('is-invalid');
+            ok = false;
+          } else email.classList.add('is-valid');
+
+          if (!password.value || password.value.length < 8) {
+            password.classList.add('is-invalid');
+            ok = false;
+          } else password.classList.add('is-valid');
+
+          if (confirm.value !== password.value || !confirm.value) {
+            confirm.classList.add('is-invalid');
+            ok = false;
+          } else confirm.classList.add('is-valid');
+
+          if (!ok) return;
+
+          localStorage.setItem('signedIn', 'true');
+          alertEl.classList.remove('d-none');
+          alertEl.classList.add('show');
+          var btn = form.querySelector('button[type="submit"]');
+          if (btn) btn.disabled = true;
+          setTimeout(function () {
+            window.location.href = form.action;
+          }, 750);
+        });
       });
     </script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="assets/js/site.js"></script>
   </body>
 </html>

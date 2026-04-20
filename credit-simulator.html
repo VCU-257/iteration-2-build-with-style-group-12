@@ -3,19 +3,32 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#78c2ad">
     <title>Credit Simulator</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/minty/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
   </head>
-  <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
+  <body class="d-flex flex-column min-vh-100">
+
+    <nav class="navbar navbar-expand-md navbar-light navbar-mint">
       <div class="container-fluid">
-        <a class="navbar-brand" href="after-Sign-in.html">Home</a>
+        <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+          <i class="bi bi-house-fill" aria-hidden="true"></i><span>Home</span>
+        </a>
         <div class="collapse navbar-collapse d-md-flex" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="btn btn-outline-primary ms-2" href="index.html" onclick="localStorage.removeItem('signedIn')">Sign Out</a></li>
+          <ul class="navbar-nav ms-auto gap-md-2 align-items-md-center">
+            <li class="nav-item">
+              <a class="btn btn-outline-primary btn-sm" href="index.html" onclick="localStorage.removeItem('signedIn'); return true;">
+                <i class="bi bi-box-arrow-right me-1" aria-hidden="true"></i>Sign Out
+              </a>
+            </li>
           </ul>
         </div>
-        <button type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNav" aria-controls="offcanvasNav" aria-label="Toggle offcanvas">
+        <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNav" aria-controls="offcanvasNav" aria-label="Open menu">
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
@@ -26,62 +39,68 @@
         <h5 class="offcanvas-title" id="offcanvasNavLabel">Menu</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
-      <div class="offcanvas-body ">
-        <ul class="nav nav-pills nav-fill flex-column">
-            <li class="nav-item"><a class="nav-link" href="after-Sign-in.html">Home</a></li>
+      <div class="offcanvas-body">
+        <ul class="nav nav-pills flex-column gap-1">
+            <li class="nav-item"><a class="nav-link" href="index.html"><i class="bi bi-house-fill" aria-hidden="true"></i>Home</a></li>
             <li class="nav-item">
-                <div class="nav-pills dropdown"><button class="btn nav-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Learn</button>
-        
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item nav-link" href="learning-page.html">Learning Home</a></li>            
-                        <li><a class="dropdown-item nav-link-active" href="credit-simulator.html">Credit Simulator</a></li>
-                        <li><a class="dropdown-item nav-link" href="money-tips.html">Money Tips</a></li>
-                        <li><a class="dropdown-item nav-link" href="guides.html">Guides</a></li>
-                
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle w-100 text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="bi bi-pencil-square me-1" aria-hidden="true"></i>Learn
+                    </button>
+                    <ul class="dropdown-menu w-100">
+                        <li><a class="dropdown-item" href="learning-page.html">Learning Home</a></li>
+                        <li><a class="dropdown-item active" href="credit-simulator.html">Credit Simulator</a></li>
+                        <li><a class="dropdown-item" href="money-tips.html">Money Tips</a></li>
+                        <li><a class="dropdown-item" href="guides.html">Guides</a></li>
                     </ul>
                 </div>
             </li>
-            <li class="nav-item"><a class="nav-link" href="#">Budget</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
-            
-            <li class="nav-item"><a class="nav-link" href="#">Help</a></li>
-            <li class="nav-item"><a class="nav-link" href="index.html" onclick="localStorage.removeItem('signedIn')">Sign Out</a></li>
+            <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-wallet2" aria-hidden="true"></i>Budget</a></li>
+            <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-person-circle" aria-hidden="true"></i>Profile</a></li>
+            <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-question-circle-fill" aria-hidden="true"></i>Help</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html" onclick="localStorage.removeItem('signedIn');"><i class="bi bi-box-arrow-right" aria-hidden="true"></i>Sign Out</a></li>
         </ul>
       </div>
     </div>
 
-    <main class="container py-4">
-      <div class="row">
+    <main class="container mint-container py-4 flex-grow-1">
+      <div class="row mb-3 g-3">
         <div class="col-12">
-          <h1>Credit Simulator</h1>
-          <p class="lead">Adjust the credit score and loan amount to estimate an interest rate.</p>
+          <h1 class="d-flex align-items-center gap-2 flex-wrap mb-2">
+            <i class="bi bi-calculator text-primary" aria-hidden="true"></i>Credit Simulator
+          </h1>
+          <p class="lead mb-0">Adjust the credit score and loan amount to estimate an interest rate.</p>
         </div>
       </div>
-      <div class="row g-3">
+      <div class="row g-4">
         <div class="col-12 col-md-6">
           <label for="scoreRange" class="form-label">Credit Score: <span id="scoreLabel">700</span></label>
-          <input type="range" class="form-range" min="300" max="850" value="700" id="scoreRange">
+          <input type="range" class="form-range" min="300" max="850" value="700" id="scoreRange" aria-valuemin="300" aria-valuemax="850" aria-valuenow="700">
         </div>
         <div class="col-12 col-md-6">
           <label for="loanAmount" class="form-label">Loan Amount</label>
           <div class="input-group">
             <span class="input-group-text">$</span>
-            <input type="number" class="form-control" id="loanAmount" value="10000" min="0">
+            <input type="number" class="form-control" id="loanAmount" value="10000" min="0" aria-describedby="loanHelp">
           </div>
+          <div id="loanHelp" class="form-text">Prototype estimate only — not financial advice.</div>
         </div>
         <div class="col-12">
-          <button id="calcBtn" class="btn btn-primary">Estimate Rate</button>
+          <button id="calcBtn" type="button" class="btn btn-primary"><i class="bi bi-graph-up-arrow me-1" aria-hidden="true"></i>Estimate Rate</button>
         </div>
         <div class="col-12">
-          <div class="card">
+          <div class="card shadow-sm">
             <div class="card-body">
-              <h5 class="card-title">Estimated Interest Rate</h5>
-              <p class="card-text">Based on inputs, estimated APR: <strong id="resultRate">—</strong></p>
+              <h2 class="h5 card-title">Estimated Interest Rate</h2>
+              <p class="card-text mb-0">Based on inputs, estimated APR: <strong id="resultRate">—</strong></p>
             </div>
           </div>
         </div>
       </div>
     </main>
+
+    <footer class="site-footer border-top">
+    </footer>
 
     <script>
       const scoreRange = document.getElementById('scoreRange');
@@ -99,6 +118,7 @@
 
       scoreRange.addEventListener('input', () => {
         scoreLabel.textContent = scoreRange.value;
+        scoreRange.setAttribute('aria-valuenow', scoreRange.value);
       });
 
       calcBtn.addEventListener('click', () => {
@@ -110,6 +130,7 @@
       });
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/site.js"></script>
   </body>
 </html>
