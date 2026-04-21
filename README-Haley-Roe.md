@@ -1,11 +1,13 @@
 # Student Name: Haley Roe 
 
 ## 1. My Assigned Work
-helped with choosing styleing, articles and videos for learning page, and worked on final presentation  
+Helped with choosing styling, Articles and Videos for Learning Page, Helped with Debugging, and Worked on Final Presentation  
  
 ## 2. Bootstrap Implementation
 *Briefly explain the standard components you used for your assigned areas. Did you stick to the plan from Table 1?*
-found links and references for articles and videos, bootstap css file  |  yes I stuck to the plan made
+I found links and references for articles and videos, worked with group to pick the bootstap css file, and walked through the user flow for the learning page and fixed any errors I saw.
+Yes I stuck to the plan made.
+  
 
 ## 3. Technical Challenges & Solutions
 Look back at Table 4: The hardest part was finding videos and articles that explain concepts well. I wanted to make sure they were comprehensive for users and that the information was reliable. 
@@ -15,5 +17,8 @@ Look back at Table 4: The hardest part was finding videos and articles that expl
 
 ## 5. Live Site Link
 *Provide the GitHub Pages link to the specific page(s) you built.*  
-* **Live URL:** sign-in.html       https://github.com/VCU-257/ugly-build-with-bootstrap-group-12/blob/master/sign-in.html
-                sign-up.html       https://github.com/VCU-257/ugly-build-with-bootstrap-group-12/blob/master/sign-up.html 
+* **Live URL:** sign-in.html            https://github.com/VCU-257/iteration-2-build-with-style-group-12/blob/main/sign-in.html
+                sign-up.html            https://github.com/VCU-257/ugly-build-with-bootstrap-group-12/blob/master/sign-up.html 
+                index.html              https://github.com/VCU-257/iteration-2-build-with-style-group-12/blob/main/index.html 
+                credit-simulator.html   https://github.com/VCU-257/iteration-2-build-with-style-group-12/blob/main/credit-simulator.html
+                guides.html             https://github.com/VCU-257/iteration-2-build-with-style-group-12/blob/main/guides.html 
