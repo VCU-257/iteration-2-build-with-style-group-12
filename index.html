@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/minty/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
   </head>
   <body class="d-flex flex-column min-vh-100">
 
@@ -31,8 +31,8 @@
             </li>
           </ul>
         </div>
-        <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNav" aria-controls="offcanvasNav" aria-label="Open menu">
-          <span class="navbar-toggler-icon"></span>
+        <button class="nav-item btn-outline-primary gap-md-2 btn-sm ms-md-2" id="offcanvasToggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNav" aria-controls="offcanvasNav" aria-label="Open menu">
+          <span class="navbar-toggler-icon" ></span>
         </button>
       </div>
     </nav>
@@ -72,7 +72,10 @@
       </div>
     </div>
 
+    
+
     <main class="container mint-container py-4 flex-grow-1">
+      
       <div class="row mb-4 g-3 align-items-center">
         <div class="col-12">
           <h1 class="mb-2">Home</h1>
@@ -81,29 +84,36 @@
       </div>
       <div class="row g-3">
         <div class="col-12 col-sm-6 col-lg-3 d-flex">
-          <a href="#" class="btn btn-outline-secondary w-100 py-3 d-flex align-items-center justify-content-center gap-2">
+          <a href="#budget.html" id="navButton" class="btn btn-outline-secondary w-100 py-3 d-flex align-items-center justify-content-center gap-2">
             <i class="bi bi-wallet2 fs-5" aria-hidden="true"></i><span>Budget</span>
           </a>
         </div>
         <div class="col-12 col-sm-6 col-lg-3 d-flex">
-          <a href="#" class="btn btn-outline-secondary w-100 py-3 d-flex align-items-center justify-content-center gap-2">
+          <a href="#profile.html" id="navButton" class="btn btn-outline-secondary w-100 py-3 d-flex align-items-center justify-content-center gap-2">
             <i class="bi bi-person-circle fs-5" aria-hidden="true"></i><span>Profile</span>
           </a>
         </div>
         <div class="col-12 col-sm-6 col-lg-3 d-flex">
-          <a id="learnButton" href="learning-page.html" class="btn btn-outline-secondary w-100 py-3 d-flex align-items-center justify-content-center gap-2">
+          <a id="navButton" href="learning-page.html" class="btn btn-outline-secondary w-100 py-3 d-flex align-items-center justify-content-center gap-2">
             <i class="bi bi-pencil-square fs-5" aria-hidden="true"></i><span>Learn</span>
           </a>
         </div>
         <div class="col-12 col-sm-6 col-lg-3 d-flex">
-          <a href="#" class="btn btn-outline-secondary w-100 py-3 d-flex align-items-center justify-content-center gap-2">
+          <a href="#help.html" id="navButton" class="btn btn-outline-secondary w-100 py-3 d-flex align-items-center justify-content-center gap-2">
             <i class="bi bi-question-circle-fill fs-5" aria-hidden="true"></i><span>Help</span>
           </a>
         </div>
+        
       </div>
+      
     </main>
 
-    <footer class="site-footer border-top">
+    <div class="hero">
+      <img id="hero" src="./assets/img/pexels-karola-g-7680742.jpg" width="75%" >
+      
+    </div>
+    
+    <footer class="site-footer">
     </footer>
 
     <div class="modal fade" id="signInPromptModal" tabindex="-1" aria-labelledby="signInPromptModalLabel" aria-hidden="true">
@@ -114,7 +124,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            You need to sign in or sign up before accessing the learning content.
+            You need to sign in or sign up before accessing this content.
           </div>
           <div class="modal-footer">
             <a href="sign-up.html" class="btn btn-outline-primary">Sign Up</a>
@@ -127,7 +137,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-        var learnButton = document.getElementById('learnButton');
+        var navButton = document.getElementById('navButton');
         var signInModal = document.getElementById('signInPromptModal');
         var modal = new bootstrap.Modal(signInModal);
         if (learnButton) {
@@ -138,7 +148,7 @@
             event.preventDefault();
             modal.show();
           });
-        }
+        } 
       });
     </script>
     <script src="assets/js/site.js"></script>
