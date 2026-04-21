@@ -140,8 +140,8 @@
         var navButton = document.getElementById('navButton');
         var signInModal = document.getElementById('signInPromptModal');
         var modal = new bootstrap.Modal(signInModal);
-        if (learnButton) {
-          learnButton.addEventListener('click', function (event) {
+        if (navButton) {
+          navButton.addEventListener('click', function (event) {
             if (localStorage.getItem('signedIn') === 'true') {
               return;
             }
