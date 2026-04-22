@@ -72,9 +72,36 @@
       </div>
     </div>
 
+    <main class="container mint-container py-4 flex-grow-1">
+      <h1>Budget Dashboard</h1>
+
+    <!-- Input Form -->
+    <div class="form-container">
+        <h2>Add / Update Category</h2>
+        <form id="budgetForm">
+            <input type="text" id="category" placeholder="Category" required>
+            <input type="number" id="allocated" placeholder="Allocated Amount" required>
+            <input type="number" id="spent" placeholder="Spent Amount" required>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+
+    <!-- Total Chart -->
+    <div class="chart-container">
+        <canvas id="totalBudgetChart"></canvas>
+    </div>
+
+    <!-- Category Charts -->
+    <div id="categoryCharts" class="grid"></div>
+
+
+    </main>
+
     <footer class="site-footer">
     </footer>
 
+
+    <script src="./assets/js/budget.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
 
@@ -119,7 +146,9 @@
       });
     });
   });
-    </script>
+
+</script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/site.js"></script>
   </body>
