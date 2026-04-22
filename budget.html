@@ -72,17 +72,30 @@
       </div>
     </div>
 
-    <main class="container mint-container py-4 flex-grow-1">
+    <main class="container mint-container py-4 flex-grow-1 align-items-md-center">
       <h1>Budget Dashboard</h1>
 
     <!-- Input Form -->
-    <div class="form-container">
+    <div class="form-container py-4 flex-grow-1">
         <h2>Add / Update Category</h2>
+        <form id="balanceForm">
+          <input type="number" id="balance" type="submit" placeholder="Available Balance">
+          <button class="btn btn-outline-primary" id="balanceBtn">Save</button>
+        </form>
         <form id="budgetForm">
-            <input type="text" id="category" placeholder="Category" required>
-            <input type="number" id="allocated" placeholder="Allocated Amount" required>
-            <input type="number" id="spent" placeholder="Spent Amount" required>
-            <button type="submit">Save</button>
+          <label for="category"></label>
+            <select name="category" id="category">
+              <option value="" disabled selected hidden>Choose Category</option>
+              <option value="entertainment">Entertainment</option>
+              <option value="dining">Dining</option>
+              <option value="grocery">Grocery</option>
+              <option value="utilities">Utility</option>
+              <option value="housing">Housing</option>
+              <option value="investment">Investments</option>
+            </select>
+            <input type="number" id="allocated" placeholder="Allocated Amount">
+            <input type="number" id="spent" placeholder="Spent Amount">
+            <button class="btn btn-outline-primary" type="submit">Save</button>
         </form>
     </div>
 
@@ -100,23 +113,24 @@
     <footer class="site-footer">
     </footer>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./assets/js/budget.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
 
-    document.addEventListener('DOMContentLoaded', async function () {
-    const SUPABASE_URL = "https://fxonhdpebaatwixwjlwj.supabase.co";
+<script>
+document.addEventListener('DOMContentLoaded', async function () {
+  const SUPABASE_URL = "https://fxonhdpebaatwixwjlwj.supabase.co";
     const SUPABASE_ANON_KEY = "sb_publishable_CeEj5yl1znEzDCSc2jsWVA_1VFqID8A";
 
 
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      // Initial session check
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    const signedInEls = document.querySelectorAll('.signed-in');
-    const signedOutEls = document.querySelectorAll('.signed-out');
+  const signedInEls = document.querySelectorAll('.signed-in');
+  const signedOutEls = document.querySelectorAll('.signed-out');
 
-    function updateUI(session) {
+  let isLoggedIn = false;
+
+  function updateUI(session) {
     isLoggedIn = !!(session && session.user);
 
     if (isLoggedIn) {
@@ -128,25 +142,27 @@
     }
   }
 
-    const { data: { session } } = await supabase.auth.getSession();
+  // Initial session check
+  const { data: { session } } = await supabase.auth.getSession();
+  updateUI(session);
+
+  // React to login/logout
+  supabase.auth.onAuthStateChange((event, session) => {
     updateUI(session);
+  });
 
-    // React to login/logout
-    supabase.auth.onAuthStateChange((event, session) => {
-      updateUI(session);
-    });
-
-    // Handle ALL sign-out buttons
-    document.querySelectorAll('[href="index.html"][onclick]').forEach(el => {
-      el.removeAttribute('onclick'); // remove localStorage logic
-      el.addEventListener('click', async (e) => {
-        e.preventDefault();
-        await supabase.auth.signOut();
-        window.location.href = "index.html";
-      });
+  // Handle ALL sign-out buttons
+  document.querySelectorAll('[href="index.html"][onclick]').forEach(el => {
+    el.removeAttribute('onclick'); // remove localStorage logic
+    el.addEventListener('click', async (e) => {
+      e.preventDefault();
+      await supabase.auth.signOut();
+      localStorage.clear();
+      window.location.href = "index.html";
     });
   });
 
+});
 </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

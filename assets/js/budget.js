@@ -1,40 +1,73 @@
 let charts = [];
 
-// ---------- Local Storage Helpers ----------
+// ---------- Storage ----------
 
-function getBudgetData() {
-    const data = localStorage.getItem("budgetData");
-    return data ? JSON.parse(data) : [];
+function getBudgetState() {
+    const data = localStorage.getItem("budgetState");
+    return data ? JSON.parse(data) : { balance: 0, categories: [] };
 }
 
-function saveBudgetData(data) {
-    localStorage.setItem("budgetData", JSON.stringify(data));
+function saveBudgetState(state) {
+    localStorage.setItem("budgetState", JSON.stringify(state));
 }
 
-// ---------- Form Handling ----------
+// ---------- Balance Handling ----------
+
+document.getElementById("balanceForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const balanceInput = document.getElementById("balance");
+    const balance = parseFloat(balanceInput.value);
+
+    if (isNaN(balance) || balance < 0) return;
+
+    const state = getBudgetState();
+    state.balance = balance;
+
+    saveBudgetState(state);
+    balanceInput.value = "";
+
+    renderCharts();
+});
+
+// ---------- Category Handling ----------
 
 document.getElementById("budgetForm").addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const category = document.getElementById("category").value.trim();
+    const category = document.getElementById("category").value;
     const allocated = parseFloat(document.getElementById("allocated").value);
     const spent = parseFloat(document.getElementById("spent").value);
 
     if (!category || isNaN(allocated) || isNaN(spent)) return;
 
-    let data = getBudgetData();
+    const state = getBudgetState();
 
-    // Check if category exists → update instead of duplicate
-    const existing = data.find(item => item.category === category);
+    const totalAllocated = state.categories.reduce((sum, c) => sum + c.allocated, 0);
+
+    const existing = state.categories.find(c => c.category === category);
+
+    let newTotalAllocated;
+
+    if (existing) {
+        newTotalAllocated = totalAllocated - existing.allocated + allocated;
+    } else {
+        newTotalAllocated = totalAllocated + allocated;
+    }
+
+    if (newTotalAllocated > state.balance) {
+        alert("Allocated budget exceeds total balance.");
+        return;
+    }
 
     if (existing) {
         existing.allocated = allocated;
         existing.spent = spent;
     } else {
-        data.push({ category, allocated, spent });
+        state.categories.push({ category, allocated, spent });
     }
 
-    saveBudgetData(data);
+    saveBudgetState(state);
 
     document.getElementById("budgetForm").reset();
 
@@ -58,11 +91,17 @@ function generateColors(count) {
 
 // ---------- Charts ----------
 
-function createTotalChart(data) {
+function createTotalChart(state) {
     const ctx = document.getElementById('totalBudgetChart').getContext('2d');
 
-    const labels = data.map(item => item.category);
-    const values = data.map(item => item.allocated);
+    const labels = state.categories.map(c => c.category);
+    const values = state.categories.map(c => c.allocated);
+
+    const totalAllocated = values.reduce((a, b) => a + b, 0);
+    const remainingBalance = Math.max(0, state.balance - totalAllocated);
+
+    labels.push("Unallocated");
+    values.push(remainingBalance);
 
     const colors = generateColors(values.length);
 
@@ -79,7 +118,7 @@ function createTotalChart(data) {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Total Budget Distribution'
+                    text: `Total Balance: $${state.balance}`
                 },
                 legend: {
                     position: 'bottom'
@@ -91,11 +130,11 @@ function createTotalChart(data) {
     charts.push(chart);
 }
 
-function createCategoryCharts(data) {
+function createCategoryCharts(state) {
     const container = document.getElementById('categoryCharts');
     container.innerHTML = '';
 
-    data.forEach(item => {
+    state.categories.forEach(item => {
         const wrapper = document.createElement('div');
         wrapper.classList.add('chart-container');
 
@@ -128,17 +167,17 @@ function createCategoryCharts(data) {
     });
 }
 
-// ---------- Main Render ----------
+// ---------- Render ----------
 
 function renderCharts() {
     clearCharts();
 
-    const data = getBudgetData();
+    const state = getBudgetState();
 
-    if (!data.length) return;
+    if (!state.balance && state.categories.length === 0) return;
 
-    createTotalChart(data);
-    createCategoryCharts(data);
+    createTotalChart(state);
+    createCategoryCharts(state);
 }
 
 // ---------- Init ----------
