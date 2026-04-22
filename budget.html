@@ -72,19 +72,23 @@
       </div>
     </div>
 
-    <main class="container mint-container py-4 flex-grow-1 align-items-md-center">
+    <main class="container mint-container py-4 flex-grow-1 align-items-center">
       <h1>Budget Dashboard</h1>
 
     <!-- Input Form -->
-    <div class="form-container py-4 flex-grow-1">
+    <div class="form-container py-4 flex-grow-1 align-items-center">
         <h2>Add / Update Category</h2>
         <form id="balanceForm">
-          <input type="number" id="balance" type="submit" placeholder="Available Balance">
+          <div class="input-group">
+          <span class="input-group-text">$</span>
+          <input type="number" class="form-control" id="balance" type="submit" placeholder="Available Balance">
           <button class="btn btn-outline-primary" id="balanceBtn">Save</button>
+          </div>
         </form>
-        <form id="budgetForm">
+        <form id="budgetForm" >
+          <div class="row mb-3 g-4">
           <label for="category"></label>
-            <select name="category" id="category">
+            <select name="category" class="form-select" id="category">
               <option value="" disabled selected hidden>Choose Category</option>
               <option value="entertainment">Entertainment</option>
               <option value="dining">Dining</option>
@@ -93,14 +97,25 @@
               <option value="housing">Housing</option>
               <option value="investment">Investments</option>
             </select>
-            <input type="number" id="allocated" placeholder="Allocated Amount">
-            <input type="number" id="spent" placeholder="Spent Amount">
-            <button class="btn btn-outline-primary" type="submit">Save</button>
-        </form>
-    </div>
+            </div>
+            <div class="row mb-3 g-4 align-items-center">
+              <div class="input-group col-md-4">
+                <span class="input-group-text">$</span>
+                <input class="form-control" type="number" id="allocated" placeholder="Allocated Amount">
+              </div>
+              <div class="input-group col-md-4">
+                <span class="input-group-text">$</span>
+                  <input type="number" class="form-control" id="spent" placeholder="Spent Amount">
+              </div>
+              <button class="btn btn-outline-primary col-md-4 align-self-center" type="submit">Save</button>
+              </div>
+            </form>
+      </div>
+          
+
 
     <!-- Total Chart -->
-    <div class="chart-container">
+    <div class="chart-container grid align-items-center flex-grow-1">
         <canvas id="totalBudgetChart"></canvas>
     </div>
 

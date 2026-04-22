@@ -150,7 +150,7 @@ function createCategoryCharts(state) {
                 labels: ['Spent', 'Remaining'],
                 datasets: [{
                     data: [item.spent, remaining],
-                    backgroundColor: ['#FF6384', '#4CAF50']
+                    backgroundColor: ['#F3969A', '#78C2AD']
                 }]
             },
             options: {
