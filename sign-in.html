@@ -87,76 +87,75 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const SUPABASE_URL = "https://fxonhdpebaatwixwjlwj.supabase.co";
-  const SUPABASE_ANON_KEY = "sb_publishable_CeEj5yl1znEzDCSc2jsWVA_1VFqID8A";
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      document.addEventListener('DOMContentLoaded', function () {
+        const SUPABASE_URL = "https://fxonhdpebaatwixwjlwj.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_CeEj5yl1znEzDCSc2jsWVA_1VFqID8A";
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  var form = document.getElementById('signInForm');
-  var user = document.getElementById('username');
-  var pass = document.getElementById('password');
-  var alertEl = document.getElementById('signInAlert');
-  var alertMsg = document.getElementById('signInAlertMsg');
+        var form = document.getElementById('signInForm');
+        var user = document.getElementById('username');
+        var pass = document.getElementById('password');
+        var alertEl = document.getElementById('signInAlert');
+        var alertMsg = document.getElementById('signInAlertMsg');
 
-  function clearValidity() {
-    [user, pass].forEach(function (el) {
-      el.classList.remove('is-invalid', 'is-valid');
-    });
-  }
+        function clearValidity() {
+          [user, pass].forEach(function (el) {
+            el.classList.remove('is-invalid', 'is-valid');
+          });
+        }
 
-  if (form) {
-    form.addEventListener('submit', async function (event) {
-      event.preventDefault();
-      clearValidity();
+        if (form) {
+          form.addEventListener('submit', async function (event) {
+            event.preventDefault();
+            clearValidity();
 
-      let ok = true;
+            let ok = true;
 
-      if (!user.value.trim()) {
-        user.classList.add('is-invalid');
-        ok = false;
-      } else {
-        user.classList.add('is-valid');
-      }
+            if (!user.value.trim()) {
+              user.classList.add('is-invalid');
+              ok = false;
+            } else {
+             user.classList.add('is-valid');
+            }
 
-      if (!pass.value || pass.value.length < 6) {
-        pass.classList.add('is-invalid');
-        ok = false;
-      } else {
-        pass.classList.add('is-valid');
-      }
+            if (!pass.value || pass.value.length < 6) {
+              pass.classList.add('is-invalid');
+              ok = false;
+            } else {
+              pass.classList.add('is-valid');
+            }
 
-      if (!ok) return;
+            if (!ok) return;
 
-      const btn = form.querySelector('button[type="submit"]');
-      if (btn) btn.disabled = true;
+            const btn = form.querySelector('button[type="submit"]');
+            if (btn) btn.disabled = true;
 
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: user.value.trim(),
-        password: pass.value
+            const { data, error } = await supabase.auth.signInWithPassword({
+              email: user.value.trim(),
+              password: pass.value
+            });
+
+            if (error) {
+              alertEl.classList.remove('d-none', 'alert-success');
+              alertEl.classList.add('alert-danger', 'show');
+              alertMsg.textContent = error.message;
+              if (btn) btn.disabled = false;
+              return;
+            }
+
+            alertEl.classList.remove('d-none', 'alert-danger');
+            alertEl.classList.add('alert-success', 'show');
+            alertMsg.textContent = "Signed in successfully.";
+
+            setTimeout(function () {
+              window.location.href = "index.html";
+            }, 800);
+          });
+        }
       });
-
-      if (error) {
-        alertEl.classList.remove('d-none', 'alert-success');
-        alertEl.classList.add('alert-danger', 'show');
-        alertMsg.textContent = error.message;
-        if (btn) btn.disabled = false;
-        return;
-      }
-
-      alertEl.classList.remove('d-none', 'alert-danger');
-      alertEl.classList.add('alert-success', 'show');
-      alertMsg.textContent = "Signed in successfully.";
-
-      setTimeout(function () {
-        window.location.href = "index.html";
-      }, 800);
-    });
-  }
-});
-</script>
+    </script>
     <script src="./assets/js/site.js"></script>
   </body>
 </html>

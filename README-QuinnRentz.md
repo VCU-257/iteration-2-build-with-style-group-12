@@ -1,25 +1,21 @@
 # Student Name: Quinn Rentz
 
 ## 1. Assigned Work:
-Navbar and offcanvas for all pages
+Navbar and offcanvas for all pages, auth handling
 
 ## 2. Bootstrap Implementation
-I've had a lot of experience using Bootstrap in previous courses, so I was very familiar with leveraging the toolset in order to create a functional Offcanvas menu and nav bar. I made a slight change to the layout, I included all individual learning sections under a single dropdown accessed in the offcanvas menu. The only components in the navbar are the expand button for the offcanvas, links to login/out, and a home page link.
+Using standard bootstrap classes and additional CSS for styling, as well as vanilla JS for the budget page pie chart functions. Building off the initial ugly build, which incorporated a simulated user sign-in, I was able to attach a supabase DB for handling user authentication. The Profile page is not currently connected to the supabase auth handling, neither does the data entered in the budget page, as fully building out the backend for this felt beyond the scope of this course.
 
 ## 3. Technical Challenges & Solutions
-Artin's AI generated template included some peculiar choices vis-a-vis arrangment of navbar/offcanvas elements, which led to some necessary deconstruction of components in order to ensure our page layout aligned with our initial low-fidelity wireframing. Untangling the nested divs was the most frustrating aspect of this process, especially without the ability to leverage Javascript or Jinja/Node/React in order to make recurring components reusable across pages. Making adjustments to page specific changes between offcanvas/menu items (highlighting active page tabs, for instance) became very tedious, as I often lost which page I was actively changing while flicking between them for making adjustments.
+Ensuring the simulated budget charts populated correctly took a lot of work. My original intention was to store data in the supabase DB, and use those values to populate the charts, but configuring supabase for this was taking altogether too much time. I opted for a simulation using localStorage for this. The Profile page follows a similar story here, in that I was able to construct the layout, but configuring the handling of user preference changes on the back end was far too difficult.
 
-Instead of entirely replacing these code blocks and starting from scratch, I looked at it as an opportunity to practice for a probable future scenario in web design and working in teams to iterate on the initial templating and rearrange and refine the work done in order to produce the desired layout.
+
 
 ## 4. AI/LLM Usage
-I used no direct AI or LLM assistance while working on my sections. Since Bootstrap provides starter code for all of their components and layout features, I simply used those as jumping off points and guides in order to write the code.
+I used some generative AI for templating the Javascript logic for handling the budget page pie chart animations, as I was unfamiliar with the javascript graphs library, and the documentation didn't provide much. Using these templates, I  I used VSCode's integrated AI for assisting in debugging.
 
 ## 5. Live Site Link
 Contributions included across the following pages:
-**Live URL (Logged in homepage):** https://vcu-257.github.io/ugly-build-with-bootstrap-group-12/after-Sign-in.html
-**Live URL (Learning landing page):** https://vcu-257.github.io/ugly-build-with-bootstrap-group-12/learning-page.html
-**Live URL (Guides page):** https://vcu-257.github.io/ugly-build-with-bootstrap-group-12/guides.html
-**Live URL (Credit Simulator page):** https://vcu-257.github.io/ugly-build-with-bootstrap-group-12/credit-simulator.html
-**Live URL (Money Tips page):** https://vcu-257.github.io/ugly-build-with-bootstrap-group-12/money-tips.html
-**Live URL (Sign in/Sign up pages)** https://github.com/VCU-257/ugly-build-with-bootstrap-group-12/blob/master/sign-in.html
-                                     https://github.com/VCU-257/ugly-build-with-bootstrap-group-12/blob/master/sign-up.html 
+**Live URL (homepage):** https://vcu-257.github.io/iteration-2-build-with-style-group-12/
+**Budget page** https://vcu-257.github.io/iteration-2-build-with-style-group-12/budget.html
+**Profile page** https://vcu-257.github.io/iteration-2-build-with-style-group-12/profile.html

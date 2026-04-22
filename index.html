@@ -137,73 +137,70 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script>
-document.addEventListener('DOMContentLoaded', async function () {
-  const SUPABASE_URL = "https://fxonhdpebaatwixwjlwj.supabase.co";
-    const SUPABASE_ANON_KEY = "sb_publishable_CeEj5yl1znEzDCSc2jsWVA_1VFqID8A";
+    <script>
+      document.addEventListener('DOMContentLoaded', async function () {
+        const SUPABASE_URL = "https://fxonhdpebaatwixwjlwj.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_CeEj5yl1znEzDCSc2jsWVA_1VFqID8A";
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+        const signedInEls = document.querySelectorAll('.signed-in');
+        const signedOutEls = document.querySelectorAll('.signed-out');
 
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const budgetButton = document.getElementById('budgetButton');
+        const learningButton = document.getElementById('learningButton');
+        const profileButton = document.getElementById('profileButton');
+        const helpButton = document.getElementById('helpButton');
 
-  const signedInEls = document.querySelectorAll('.signed-in');
-  const signedOutEls = document.querySelectorAll('.signed-out');
+        const signInModal = document.getElementById('signInPromptModal');
+        const modal = new bootstrap.Modal(signInModal);
 
-  const budgetButton = document.getElementById('budgetButton');
-  const learningButton = document.getElementById('learningButton');
-  const profileButton = document.getElementById('profileButton');
-  const helpButton = document.getElementById('helpButton');
+        let isLoggedIn = false;
 
-  const signInModal = document.getElementById('signInPromptModal');
-  const modal = new bootstrap.Modal(signInModal);
+        function updateUI(session) {
+          isLoggedIn = !!(session && session.user);
 
-  let isLoggedIn = false;
+          if (isLoggedIn) {
+            signedInEls.forEach(el => el.classList.remove('d-none'));
+            signedOutEls.forEach(el => el.classList.add('d-none'));
+          } else {
+            signedInEls.forEach(el => el.classList.add('d-none'));
+            signedOutEls.forEach(el => el.classList.remove('d-none'));
+          }
+        }
 
-  function updateUI(session) {
-    isLoggedIn = !!(session && session.user);
+        function gateAccess(event) {
+          if (!isLoggedIn) {
+            event.preventDefault();
+            modal.show();
+          }
+        }
 
-    if (isLoggedIn) {
-      signedInEls.forEach(el => el.classList.remove('d-none'));
-      signedOutEls.forEach(el => el.classList.add('d-none'));
-    } else {
-      signedInEls.forEach(el => el.classList.add('d-none'));
-      signedOutEls.forEach(el => el.classList.remove('d-none'));
-    }
-  }
+        // Attach gating
+        [budgetButton, learningButton, profileButton, helpButton].forEach(btn => {
+          if (btn) btn.addEventListener('click', gateAccess);
+        });
 
-  function gateAccess(event) {
-    if (!isLoggedIn) {
-      event.preventDefault();
-      modal.show();
-    }
-  }
+        // Initial session check
+        const { data: { session } } = await supabase.auth.getSession();
+        updateUI(session);
 
-  // Attach gating
-  [budgetButton, learningButton, profileButton, helpButton].forEach(btn => {
-    if (btn) btn.addEventListener('click', gateAccess);
-  });
+        // React to login/logout
+        supabase.auth.onAuthStateChange((event, session) => {
+          updateUI(session);
+        });
 
-  // Initial session check
-  const { data: { session } } = await supabase.auth.getSession();
-  updateUI(session);
-
-  // React to login/logout
-  supabase.auth.onAuthStateChange((event, session) => {
-    updateUI(session);
-  });
-
-  // Handle ALL sign-out buttons
-  document.querySelectorAll('[href="index.html"][onclick]').forEach(el => {
-    el.removeAttribute('onclick'); // remove localStorage logic
-    el.addEventListener('click', async (e) => {
-      e.preventDefault();
-      await supabase.auth.signOut();
-      localStorage.clear();
-      window.location.href = "index.html";
-    });
-  });
-
-});
-</script>
+        // Handle ALL sign-out buttons
+        document.querySelectorAll('[href="index.html"][onclick]').forEach(el => {
+          el.removeAttribute('onclick'); // remove localStorage logic
+          el.addEventListener('click', async (e) => {
+            e.preventDefault();
+            await supabase.auth.signOut();
+            localStorage.clear();
+            window.location.href = "index.html";
+          });
+        });
+      });
+    </script>
     <script src="./assets/js/site.js"></script>
   </body>
 </html>
