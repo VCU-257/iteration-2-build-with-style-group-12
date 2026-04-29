@@ -3,7 +3,7 @@
   --mint-primary: #78c2ad;
   --mint-secondary: #f3969a;
   --mint-bg: #ffffff;
-  --mint-text: #343a40;
+  --mint-text: #424242;
   --mint-on-mint: #424242;
   --mint-radius: 12px;
   --mint-container-max: 1100px;
@@ -150,7 +150,7 @@ p,
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(52, 58, 64, 0.08) !important;
+  box-shadow: 0 12px 28px rgba(66, 66, 66, 0.08) !important;
 }
 
 .card .card-body {
@@ -160,6 +160,11 @@ p,
 .form-control,
 .form-select {
   border-radius: 0.6rem;
+}
+
+.form-text,
+.text-muted {
+  color: var(--mint-text) !important;
 }
 
 input[type="range"] {
@@ -282,7 +287,7 @@ button:focus-visible,
   background-color: var(--mint-primary);
   color: var(--mint-on-mint);
   border: none;
-  box-shadow: 0 8px 22px rgba(52, 58, 64, 0.08);
+  box-shadow: 0 8px 22px rgba(66, 66, 66, 0.08);
   z-index: 5;
 }
 #tipsCarousel .custom-carousel-control i {
@@ -292,3 +297,26 @@ button:focus-visible,
 #tipsCarousel .custom-carousel-control.carousel-control-next { right: 12px; left: auto; bottom: auto; }
 #tipsCarousel .carousel-control-prev-icon,
 #tipsCarousel .carousel-control-next-icon { display: none; }
+
+/* Home page buttons - grey styling */
+#budgetButton,
+#profileButton,
+#learningButton,
+#helpButton {
+  color: var(--mint-on-mint);
+  border-color: var(--mint-on-mint);
+  background-color: transparent;
+}
+
+#budgetButton:hover,
+#profileButton:hover,
+#learningButton:hover,
+#helpButton:hover,
+#budgetButton:focus,
+#profileButton:focus,
+#learningButton:focus,
+#helpButton:focus {
+  color: var(--mint-bg);
+  background-color: var(--mint-on-mint);
+  border-color: var(--mint-on-mint);
+}
